@@ -515,28 +515,203 @@ tw-icon {
     padding: 25px;
   }
 }
+
+/* Case Review card */
+.case-card {
+  background: #F8F5EE;
+  border: 1px solid #D9DCCF;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+  color: #394333;
+  font-family: Arial, sans-serif;
+}
+
+.case-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.case-status {
+  background: #E5E9DE;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+.case-card h3 {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  margin: 24px 0 16px;
+}
+
+.case-detail {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #D9DCCF;
+  font-size: 14px;
+}
+
+.case-detail:last-child {
+  border-bottom: none;
+}
+
+.case-detail span {
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .case-card {
+    padding: 18px;
+  }
+
+  .case-detail {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .case-detail span {
+    text-align: left;
+  }
+}
+/* Compact introduction header */
+.lab-header {
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.lab-brand {
+  line-height: 1.4;
+}
+
+.lab-subtitle,
+.lab-label {
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+/* Reduce excessive top spacing */
+tw-story {
+  padding-top: 30px;
+}
+
+@media (max-width: 600px) {
+  tw-story {
+    padding-top: 20px;
+  }
+
+  .lab-header {
+    padding: 18px;
+    gap: 10px;
+  }
+}
+/* INTRODUCTION SPACING REFINEMENT */
+
+tw-story {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.lab-header {
+  margin-bottom: 16px;
+}
+
+tw-passage h1 {
+  margin-top: 12px;
+  margin-bottom: 18px;
+}
+
+tw-passage p {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 600px) {
+  tw-story {
+    padding: 16px 18px 28px;
+    font-size: 16px;
+  }
+}
+tw-story,
+tw-passage,
+tw-link {
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* INVESTIGATION PROGRESS BAR FIX */
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #CBD5C4;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-fill {
+  display: block;
+  height: 10px;
+  background: #555D49;
+  border-radius: 20px;
+}
+/* Native investigation progress bar */
+.progress-panel progress {
+  display: block;
+  width: 100%;
+  height: 12px;
+  margin: 16px 0;
+  accent-color: #555D49;
+}
+
+/* EVIDENCE LIST SPACING */
+.evidence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0 12px;
+}
+
+.evidence-item {
+  margin: 0;
+  padding: 14px 18px;
+  min-height: 0;
+}
+
+.evidence-item p {
+  margin: 0;
+}
 </style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start" tags="" position="550,300" size="100,100">
 (set: $accuracy to 0)
 (set: $duplicateCreated to false)
 (set: $verificationChecked to false)
 
-&lt;div class=&quot;lab-header&quot;&gt;
-  &lt;div&gt;
-    &lt;div class=&quot;lab-brand&quot;&gt;OPERATIONS LEARNING LAB&lt;/div&gt;
-    &lt;div class=&quot;lab-subtitle&quot;&gt;CASE MANAGEMENT SIMULATION&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;lab-label&quot;&gt;INTERACTIVE EXPERIENCE&lt;/div&gt;
-&lt;/div&gt;
+(set: $historyReviewed to false)
+(set: $systemReviewed to false)
+(set: $notesReviewed to false)
+(set: $reviewCount to 0)
+(set: $reviewedBeforeDecision to false)
+
+&lt;div class=&quot;lab-header&quot;&gt;&lt;div&gt;&lt;div class=&quot;lab-brand&quot;&gt;OPERATIONS LEARNING LAB&lt;/div&gt;&lt;div class=&quot;lab-subtitle&quot;&gt;CASE MANAGEMENT SIMULATION&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;lab-label&quot;&gt;INTERACTIVE EXPERIENCE&lt;/div&gt;&lt;/div&gt;
 
 # One request. Multiple paths.
 
 **YOUR CHALLENGE**
 
-You&#39;re an operations specialist reviewing a customer request that hasn&#39;t been resolved.
+You&#39;re an operations specialist reviewing an unresolved account update.
 
-The customer contacted your team two days ago. Their account update is still pending, and the previous case notes are incomplete.
+The customer contacted your team two days ago, but the request remains pending and the previous case notes are incomplete.
 
-Your task is to determine the appropriate next step while avoiding duplicate work and unnecessary escalation.
+Your goal is to determine the appropriate next action while avoiding duplicate work and unnecessary escalation.
 
 [[REVIEW THE CASE →-&gt;Case Review]]
 </tw-passagedata><tw-passagedata pid="2" name="Case Review" tags="" position="550,425" size="100,100">
@@ -546,12 +721,17 @@ Consider what you know and what you still need to verify before taking action.
 
 **CASE #108423 — PENDING REVIEW**
 
-| FIELD | CASE INFORMATION |
-|---|---|
-| Request | Account Update |
-| Previous Action | Submitted 2 days ago |
-| Verification | Incomplete |
-| Resolution | Not confirmed |
+
+&lt;div class=&quot;case-card&quot;&gt;
+  &lt;h3&gt;CASE #108423 — PENDING REVIEW&lt;/h3&gt;
+  &lt;h4&gt;Case Information&lt;/h4&gt;
+
+  &lt;p&gt;&lt;strong&gt;Request:&lt;/strong&gt; Account Update&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Previous Action:&lt;/strong&gt; Submitted 2 days ago&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Verification:&lt;/strong&gt; Incomplete&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Resolution:&lt;/strong&gt; Not confirmed&lt;/p&gt;
+&lt;/div&gt;
+
 
 The customer is waiting for an update, but the available documentation does not establish what happened after the request was submitted.
 
@@ -615,7 +795,7 @@ You discover that the account update was submitted two days ago, but the documen
 Reviewing existing records helps you identify missing information before taking additional action.
 
 [[Continue investigating-&gt;Case Discovery]]
-</tw-passagedata><tw-passagedata pid="6" name="Premature Escalation" tags="" position="675,675" size="100,100">
+</tw-passagedata><tw-passagedata pid="6" name="Premature Escalation" tags="" position="675,700" size="100,100">
 # The case is returned.
 
 **YOUR DECISION: ESCALATE IMMEDIATELY**
@@ -849,9 +1029,7 @@ The customer has contacted your team twice and is requesting a resolution.
 
 **YOUR CHALLENGE**
 
-Investigate the available information and determine the most appropriate next action.
-
-You can review the case history, system status, and customer notes before making your decision.
+The system indicates the request is complete, but the customer reports otherwise. Your responsibility is to investigate the conflicting information before determining the appropriate next action.
 
 [[OPEN CASE FILE-&gt;Investigation Hub]]
 </tw-passagedata><tw-passagedata pid="16" name="Investigation Hub" tags="" position="425,1550" size="100,100">
@@ -859,95 +1037,38 @@ You can review the case history, system status, and customer notes before making
   &lt;div&gt;
     &lt;div class=&quot;case-eyebrow&quot;&gt;CASE #108590&lt;/div&gt;
     &lt;h1&gt;Account Update Review&lt;/h1&gt;
-    &lt;p&gt;Investigate the conflicting information before
-    determining the appropriate next action.&lt;/p&gt;
+    &lt;p&gt;Investigate the conflicting information before determining the appropriate next action.&lt;/p&gt;
   &lt;/div&gt;
-  &lt;span class=&quot;status-pill&quot;&gt;PENDING REVIEW&lt;/span&gt;
-&lt;/div&gt;
+  
+&lt;span class=&quot;status-pill&quot;&gt;PENDING REVIEW&lt;/span&gt;
+&lt;/div&gt; &lt;div class=&quot;case-panel&quot;&gt;&lt;div class=&quot;panel-label&quot;&gt;CASE SUMMARY&lt;/div&gt;&lt;div class=&quot;case-grid&quot;&gt;&lt;div&gt;&lt;span class=&quot;field-label&quot;&gt;Request&lt;/span&gt;&lt;strong&gt;Account Update&lt;/strong&gt;&lt;/div&gt;&lt;div&gt;&lt;span class=&quot;field-label&quot;&gt;Processing&lt;/span&gt;&lt;strong&gt;Completed&lt;/strong&gt;&lt;/div&gt;&lt;div&gt;&lt;span class=&quot;field-label&quot;&gt;Customer Report&lt;/span&gt;&lt;strong&gt;Update not reflected&lt;/strong&gt;&lt;/div&gt;&lt;div&gt;&lt;span class=&quot;field-label&quot;&gt;Resolution&lt;/span&gt;&lt;strong&gt;Not confirmed&lt;/strong&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;case-panel&quot;&gt;
-  &lt;div class=&quot;panel-label&quot;&gt;CASE SUMMARY&lt;/div&gt;
-
-  &lt;div class=&quot;case-grid&quot;&gt;
-    &lt;div&gt;
-      &lt;span class=&quot;field-label&quot;&gt;Request&lt;/span&gt;
-      &lt;strong&gt;Account Update&lt;/strong&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;span class=&quot;field-label&quot;&gt;Processing&lt;/span&gt;
-      &lt;strong&gt;Completed&lt;/strong&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;span class=&quot;field-label&quot;&gt;Customer Report&lt;/span&gt;
-      &lt;strong&gt;Update not reflected&lt;/strong&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;span class=&quot;field-label&quot;&gt;Resolution&lt;/span&gt;
-      &lt;strong&gt;Not confirmed&lt;/strong&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;h2&gt;Available Evidence&lt;/h2&gt;
+&lt;h2&gt;Available Evidence&lt;/h2&gt; &lt;p&gt;&lt;strong&gt;Review all three records before proceeding.&lt;/strong&gt;&lt;/p&gt; &lt;p&gt;Select each record below to investigate the conflicting information. 
+Your progress will be tracked automatically.&lt;/p&gt;
 
 &lt;div class=&quot;evidence-list&quot;&gt;
   &lt;div class=&quot;evidence-item&quot;&gt;
     &lt;span class=&quot;evidence-number&quot;&gt;01&lt;/span&gt;
     [[Review Case History-&gt;Case History]]
   &lt;/div&gt;
-
-  &lt;div class=&quot;evidence-item&quot;&gt;
+ &lt;div class=&quot;evidence-item&quot;&gt;
     &lt;span class=&quot;evidence-number&quot;&gt;02&lt;/span&gt;
     [[Review System Status-&gt;System Status]]
   &lt;/div&gt;
-
-  &lt;div class=&quot;evidence-item&quot;&gt;
+&lt;div class=&quot;evidence-item&quot;&gt;
     &lt;span class=&quot;evidence-number&quot;&gt;03&lt;/span&gt;
     [[Review Customer Notes-&gt;Customer Notes]]
+  &lt;/div&gt; 
   &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;progress-panel&quot;&gt;
-  &lt;strong&gt;Investigation Progress&lt;/strong&gt;
-
-  (set: _reviewCount to 0)
-
-  (if: $historyReviewed)[
-    (set: _reviewCount to _reviewCount + 1)
-  ]
-  (if: $systemReviewed)[
-    (set: _reviewCount to _reviewCount + 1)
-  ]
-  (if: $notesReviewed)[
-    (set: _reviewCount to _reviewCount + 1)
-  ]
-
-  Records reviewed: (print: _reviewCount) of 3
-
-  
-(if: _reviewCount is 0)[
-&lt;div class=&quot;progress-track&quot;&gt;
-  &lt;div class=&quot;progress-fill&quot; style=&quot;width:0%&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-]
-(else-if: _reviewCount is 1)[
-&lt;div class=&quot;progress-track&quot;&gt;
-  &lt;div class=&quot;progress-fill&quot; style=&quot;width:33%&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-]
-(else-if: _reviewCount is 2)[
-&lt;div class=&quot;progress-track&quot;&gt;
-  &lt;div class=&quot;progress-fill&quot; style=&quot;width:67%&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-]
-(else:)[
-&lt;div class=&quot;progress-track&quot;&gt;
-  &lt;div class=&quot;progress-fill&quot; style=&quot;width:100%&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-]
-
-  [[PROCEED TO FINAL DECISION-&gt;Final Decision]]
-&lt;/div&gt;
+(set: $reviewCount to 0)(if: $historyReviewed)[(set: $reviewCount to $reviewCount + 1)](if: $systemReviewed)[(set: $reviewCount to $reviewCount + 1)](if: $notesReviewed)[(set: $reviewCount to $reviewCount + 1)]
+&lt;div class=&quot;progress-panel&quot;&gt;&lt;strong&gt;Investigation Progress&lt;/strong&gt;&lt;div class=&quot;progress-content&quot;&gt;Records reviewed: (print: $reviewCount) of 3
+(if: $reviewCount is 0)[&lt;progress value=&quot;0&quot; max=&quot;3&quot;&gt;&lt;/progress&gt;]
+(else-if: $reviewCount is 1)[&lt;progress value=&quot;1&quot; max=&quot;3&quot;&gt;&lt;/progress&gt;]
+(else-if: $reviewCount is 2)[&lt;progress value=&quot;2&quot; max=&quot;3&quot;&gt;&lt;/progress&gt;]
+(else:)[&lt;progress value=&quot;3&quot; max=&quot;3&quot;&gt;&lt;/progress&gt;]
+(if: $reviewCount &lt; 3)[&lt;p class=&quot;progress-instruction&quot;&gt;Review all three records before making your final decision.&lt;/p&gt;]
+(else:)[&lt;p class=&quot;progress-instruction&quot;&gt;Investigation complete. You&#39;ve reviewed all three records. Proceed to your final decision.&lt;/p&gt;]&lt;/div&gt;
+&lt;div class=&quot;decision-action&quot;&gt;[[PROCEED TO FINAL DECISION-&gt;Final Decision]]&lt;/div&gt;&lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="17" name="Case History" tags="" position="237.5,1675" size="100,100">
 
 (set: $historyReviewed to true)
@@ -974,20 +1095,19 @@ You can review the case history, system status, and customer notes before making
 
   &lt;div class=&quot;record-entry&quot;&gt;
     &lt;strong&gt;Day 3 — Customer Follow-Up&lt;/strong&gt;
-    &lt;p&gt;Customer reports that the account information
-    remains unchanged.&lt;/p&gt;
+    &lt;p&gt;Customer reports that the account information remains unchanged.&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;finding-panel&quot;&gt;
   &lt;strong&gt;KEY FINDING&lt;/strong&gt;
-  &lt;p&gt;The case was marked completed, but the
-  documentation does not confirm that the
-  customer&#39;s issue was resolved.&lt;/p&gt;
+  &lt;p&gt;The case was marked completed, but the documentation does not confirm that the customer&#39;s issue was resolved.&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;decision-action&quot;&gt;
-[[RETURN TO INVESTIGATION-&gt;Investigation Hub]]
+(link: &quot;RETURN TO INVESTIGATION&quot;)[
+  (go-to: &quot;Investigation Hub&quot;)
+]
 &lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="18" name="System Status" tags="" position="362.5,1675" size="100,100">
 (set: $systemReviewed to true)
@@ -1154,8 +1274,7 @@ You avoided premature closure and unnecessary reprocessing while identifying the
     OPERATIONS LEARNING LAB / COMPLETE
   &lt;/div&gt;
   &lt;h1&gt;Your Decision-Making Review&lt;/h1&gt;
-  &lt;p&gt;Explore how your decisions influenced
-  the investigation and resolution process.&lt;/p&gt;
+  &lt;p&gt;Explore how your decisions influenced the investigation and resolution process.&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;results-grid&quot;&gt;
@@ -1196,28 +1315,23 @@ You avoided premature closure and unnecessary reprocessing while identifying the
   (if: $accuracy is 2)[
   **Guided decisions**
 
-  You selected the preferred actions in both
-  guided scenarios.
+  You selected the preferred actions in both guided scenarios.
   ]
   (else:)[
   **Guided decisions**
 
-  You selected (print: $accuracy) of 2 preferred
-  actions. Review how earlier investigation
-  could improve your decision-making.
+  You selected (print: $accuracy) of 2 preferred actions. Review how earlier investigation could improve your decision-making.
   ]
 
   (if: $reviewedBeforeDecision)[
   **Investigation approach**
 
-  You reviewed all available evidence before
-  committing to your final decision.
+  You reviewed all available evidence before committing to your final decision.
   ]
   (else:)[
   **Investigation approach**
 
-  You made your final decision without reviewing
-  all three available records.
+  You made your final decision without reviewing all three available records.
   ]
 
   **Final decision**
@@ -1226,13 +1340,11 @@ You avoided premature closure and unnecessary reprocessing while identifying the
 
   (if: $finalDecision is
   &quot;Investigated discrepancy&quot;)[
-  You selected the preferred approach by
-  investigating the conflicting information
+  You selected the preferred approach by investigating the conflicting information
   before determining the resolution path.
   ]
   (else:)[
-  Your final decision introduced avoidable
-  risk. Consider how further investigation
+  Your final decision introduced avoidable risk. Consider how further investigation
   could improve the outcome.
   ]
 &lt;/div&gt;
@@ -1240,8 +1352,7 @@ You avoided premature closure and unnecessary reprocessing while identifying the
 &lt;div class=&quot;finding-panel&quot;&gt;
   &lt;strong&gt;KEY TAKEAWAYS&lt;/strong&gt;
 
-  - Review existing records before creating
-    additional work.
+  - Review existing records before creating additional work.
   - Verify requirements before proceeding.
   - Investigate conflicting information.
   - Avoid premature closure.
@@ -1253,51 +1364,7 @@ You avoided premature closure and unnecessary reprocessing while identifying the
 &lt;/div&gt;
 
 
-(if: $accuracy is 2)[
-Strong start. You consistently selected the preferred actions during the guided cases.
-]
-(else:)[
-Review the feedback from the guided cases to strengthen your approach to verification and case investigation.
-]
 
----
-
-**FINAL INVESTIGATION**
-
-**Records reviewed:** (print: _recordsReviewed) of 3
-
-(if: $reviewedBeforeDecision)[
-You reviewed all available evidence before
-committing to your final decision.
-]
-(else:)[
-You made your final decision without reviewing
-all available evidence.
-]
-
-
-**FINAL DECISION**
-
-$finalDecision
-
-(if: $finalDecision is &quot;Investigated discrepancy&quot;)[
-You selected the preferred resolution approach by investigating conflicting information before acting.
-]
-(else:)[
-Your final decision introduced avoidable risk. Review how additional investigation could have improved the outcome.
-]
-
----
-
-**KEY TAKEAWAYS**
-
-- Review existing records before creating new work.
-- Verify requirements before proceeding.
-- Investigate conflicting information.
-- Avoid premature closure and unnecessary escalation.
-- Document the rationale for your decisions.
-
-[[RESTART EXPERIENCE-&gt;Start]]
 </tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
